@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('image')->nullable();
-            $table->foreignId('parent_category_id')->nullable()->constrained('parent_categories')->cascadeOnDelete();
+            // $table->foreignId('parent_category_id')->nullable()->constrained('parent_categories')->cascadeOnDelete();
             $table->foreignId('category_id')->nullable()->constrained('categories')->cascadeOnDelete();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
@@ -29,7 +29,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('sub_categories', function (Blueprint $table) {
-            $table->dropForeign(['parent_category_id']);
+            // $table->dropForeign(['parent_category_id']);
             $table->dropForeign(['category_id']);
         });
         Schema::dropIfExists('sub_categories');

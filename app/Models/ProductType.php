@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ProductType extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'slug','image','parent_id','category_id','sub_category_id','is_active'];
-    public function parentCategory(){
-        return $this->belongsTo(ParentCategory::class);
-    }
+    protected $fillable = ['name', 'slug','image','category_id','sub_category_id','is_active'];
+    // public function parentCategory(){
+    //     return $this->belongsTo(ParentCategory::class);
+    // }
     public function category(){
         return $this->belongsTo(Category::class);
     }
