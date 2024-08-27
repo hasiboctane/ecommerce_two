@@ -18,3 +18,5 @@ class OrderItem extends Model
         return $this->belongsTo(Product::class);
     }
 }
+// Change ::
+// total_amount -> total_price & unit_amount -> unit_price
