@@ -21,7 +21,7 @@ use Illuminate\Support\Str;
 class ProductTypeResource extends Resource
 {
     protected static ?string $model = ProductType::class;
-
+    protected static ?int $navigationSort = 7;
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
     public static function form(Form $form): Form

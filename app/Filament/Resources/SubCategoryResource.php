@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 class SubCategoryResource extends Resource
 {
     protected static ?string $model = SubCategory::class;
-
+    protected static ?int $navigationSort = 6;
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
     public static function form(Form $form): Form

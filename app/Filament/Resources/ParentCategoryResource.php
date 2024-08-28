@@ -19,6 +19,7 @@ use Illuminate\Support\Str;
 
 class ParentCategoryResource extends Resource
 {
+    protected static ?int $navigationSort = 8;
     protected static ?string $model = ParentCategory::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
