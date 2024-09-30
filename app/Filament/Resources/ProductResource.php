@@ -50,7 +50,7 @@ class ProductResource extends Resource
 
                     ])->columns(2),
                     Section::make('Images')->schema([
-                        Forms\Components\FileUpload::make('Images')
+                        Forms\Components\FileUpload::make('images')
                             ->image()
                             ->multiple()
                             ->directory('products')
