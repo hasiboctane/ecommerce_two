@@ -21,6 +21,7 @@ class CartPage extends Component
 
     public function incrementQuantity($productId)
     {
+
         $this->cart = CartManagement::updateQuantity($productId, $this->cart[$productId]['quantity'] + 1);
         $this->subtotal = CartManagement::getCartTotal($this->cart);
 
