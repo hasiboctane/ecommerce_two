@@ -20,6 +20,12 @@
                         <!-- Form -->
                         <form wire:submit.prevent="login">
                             <div class="grid gap-y-4">
+                                @if (session()->has('success'))
+                                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+                                        role="alert">
+                                        <span class="block sm:inline">{{ session('success') }}</span>
+                                    </div>
+                                @endif
                                 <div>
                                     <label for="email" class="block text-sm mb-2 dark:text-white">Email
                                         address</label>
@@ -48,7 +54,7 @@
                                         <label for="password"
                                             class="block text-sm mb-2 dark:text-white">Password</label>
                                         <a class="text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                                            href="/forgot">Forgot password?</a>
+                                            href="/forgot-password">Forgot password?</a>
                                     </div>
                                     <div class="relative">
                                         <input wire:model="password" type="password" id="password" name="password"
