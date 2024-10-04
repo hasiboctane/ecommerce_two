@@ -11,7 +11,7 @@ class CartManagement
     private static $cookieName = 'cart_items';
     private static $cookieExpiration = 60 * 24 * 7; // 1 week
 
-    public static function addItemToCart(int $productId, int $quantity = 1): int
+    public static function addItemToCart(int $productId, int $quantity =1): int
     {
         $cart = self::getCartItemsFromCookie();
 
@@ -22,10 +22,11 @@ class CartManagement
         }
 
         $cartItem = [
-            'id' => $product->id,
+            'product_id' => $product->id,
             'name' => $product->name,
-            'price' => $product->price,
             'quantity' => $quantity,
+            'unit_amount' => $product->price,
+            'total_amount' => $product->price * $quantity,
             'image' => $product->images[0] ?? null,
         ];
 
@@ -56,6 +57,7 @@ class CartManagement
 
         if (isset($cart[$productId])) {
             $cart[$productId]['quantity'] = max(1, $quantity);
+            $cart[$productId]['total_amount'] = $cart[$productId]['unit_amount'] * $cart[$productId]['quantity'];
             self::saveCart($cart);
         }
         return $cart;
@@ -80,7 +82,7 @@ class CartManagement
         $total = 0;
 
         foreach ($items as $item) {
-            $total += $item['price'] * $item['quantity'];
+            $total += $item['unit_amount'] * $item['quantity'];
         }
 
         return $total;

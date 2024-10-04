@@ -45,19 +45,20 @@
         </li>
 
     </ul>
-    <div class="hidden md:flex gap-2 justify-between items-center">
-        <a class="font-medium flex items-center text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+    <div class="hidden md:flex gap-4 justify-between items-center">
+        <a class="relative font-medium flex items-center text-rose-700 hover:text-rose-500 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
             href="{{ route('cart') }}" wire:navigate>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="flex-shrink-0 w-5 mr-1">
+                stroke="currentColor" class="flex-shrink-0 w-6 mr-0 ">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
             </svg>
-            <span class="mr-1">Cart</span> <span
-                class="py-0 px-1 rounded-full text-xs font-semibold bg-blue-50 border border-blue-200 text-blue-600">{{ $total_count }}</span>
+            {{-- <span class="mr-1">Cart</span> --}}
+            <span
+                class="@if ($total_count == 0) hidden @endif px-1 py-0 absolute -top-1.5 -right-3 rounded-full text-xs font-bold bg-rose-50 border border-rose-500 text-rose-600">{{ $total_count }}</span>
         </a>
         @guest
-            <a class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-md border border-transparent bg-rose-700 text-white hover:bg-rose-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            <a class="py-1.5 px-2.5 ml-4 inline-flex items-center gap-x-1 text-sm font-semibold rounded-md border border-transparent bg-rose-700 text-white hover:bg-rose-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 href="{{ route('login') }}" wire:navigate>
                 <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

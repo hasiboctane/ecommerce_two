@@ -16,7 +16,7 @@
                         </thead>
                         <tbody>
                             @forelse ($cart as $item)
-                                <tr wire:key="{{ $item['id'] }}">
+                                <tr wire:key="{{ $item['product_id'] }}">
                                     <td class="py-4">
                                         <div class="flex items-center">
                                             <img class="h-16 w-16 mr-4"
@@ -25,20 +25,21 @@
                                             <span class="font-semibold">{{ $item['name'] }}</span>
                                         </div>
                                     </td>
-                                    <td class="py-4">{{ Number::currency($item['price'], 'BDT') }}</td>
+                                    <td class="py-4">{{ Number::currency($item['unit_amount'], 'BDT') }}</td>
                                     <td class="py-4">
                                         <div class="flex items-center">
-                                            <button wire:click="decrementQuantity({{ $item['id'] }})"
+                                            <button wire:click="decrementQuantity({{ $item['product_id'] }})"
                                                 class="border rounded-md py-2 px-4 mr-2">-</button>
                                             <span class="text-center w-8">{{ $item['quantity'] }}</span>
-                                            <button wire:click="incrementQuantity({{ $item['id'] }})"
+                                            <button wire:click="incrementQuantity({{ $item['product_id'] }})"
                                                 class="border rounded-md py-2 px-4 ml-2">+</button>
                                         </div>
                                     </td>
-                                    <td class="py-4">{{ Number::currency($item['price'] * $item['quantity'], 'BDT') }}
+                                    <td class="py-4">{{ Number::currency($item['total_amount'], 'BDT') }}
                                     </td>
+
                                     <td>
-                                        <button wire:click="removeItemFromCart({{ $item['id'] }})">
+                                        <button wire:click="removeItemFromCart({{ $item['product_id'] }})">
                                             <svg class="text-rose-500 w-8 h-8 hover:text-red-800" viewBox="0 0 50 50"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path fill="currentColor" d="M20 18h2v16h-2z" />

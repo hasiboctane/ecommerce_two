@@ -26,12 +26,6 @@ class CartPage extends Component
         $this->subtotal = CartManagement::getCartTotal($this->cart);
 
     }
-    public function removeItemFromCart($productId)
-    {
-        $this->cart = CartManagement::removeItemFromCart($productId);
-        $this->subtotal = CartManagement::getCartTotal($this->cart);
-        $this->dispatch('cart-count-updated', total_count:count($this->cart))->to(Navbar::class);
-    }
 
     public function decrementQuantity($productId)
     {
@@ -40,13 +34,19 @@ class CartPage extends Component
             $this->subtotal = CartManagement::getCartTotal($this->cart);
         }
     }
-
-    private function calculateSubtotal()
+    public function removeItemFromCart($productId)
     {
-        return array_reduce($this->cart, function ($carry, $item) {
-            return $carry + ($item['price'] * $item['quantity']);
-        }, 0);
+        $this->cart = CartManagement::removeItemFromCart($productId);
+        $this->subtotal = CartManagement::getCartTotal($this->cart);
+        $this->dispatch('cart-count-updated', total_count:count($this->cart))->to(Navbar::class);
     }
+
+    // private function calculateSubtotal()
+    // {
+    //     return array_reduce($this->cart, function ($carry, $item) {
+    //         return $carry + ($item['price'] * $item['quantity']);
+    //     }, 0);
+    // }
 
     public function render()
     {
