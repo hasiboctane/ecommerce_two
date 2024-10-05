@@ -16,9 +16,6 @@
                                             class="object-cover w-full lg:h-20 cursor-pointer hover:border hover:border-blue-500">
                                     </div>
                                 @endforeach
-
-
-
                             </div>
                         @endif
                         <div class="px-6 pb-6 mt-6 border-t border-gray-300 dark:border-gray-400 ">
