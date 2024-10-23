@@ -43,6 +43,9 @@ class CategoryResource extends Resource
                                 ->maxLength(255),
 
                         ]),
+                        Forms\Components\Select::make('parent_category')
+                            ->relationship('parentCategory','name')
+                            ->label('Product for'),
                         Forms\Components\FileUpload::make('image')
                             ->image()
                             ->directory('categories'),
@@ -61,6 +64,9 @@ class CategoryResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('parentCategory.name')
+                    ->label("Product for")
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\ImageColumn::make('image'),
                 // Tables\Columns\TextColumn::make('parent_category_id')
                 //     ->numeric()

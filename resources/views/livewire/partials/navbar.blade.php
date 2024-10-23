@@ -8,41 +8,33 @@
     </a>
     <!-- Desktop Menu -->
     <ul class="hidden items-center gap-4 opacity-100 md:flex">
+        @foreach ($parent_categories as $pc)
+            <div x-data="{ isOpen: false }" class="relative" @mouseenter="isOpen = true" @mouseleave="isOpen = false">
+                <button type="button"
+                    class="inline-flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-xl px-4 py-2 text-sm font-medium tracking-wide transition hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800 dark:focus-visible:outline-slate-300"
+                    :class="isOpen ? 'text-rose-700 dark:text-rose-600' : 'text-slate-700 dark:text-slate-300'">
+                    <a href="{{ route('products', ['parent_category' => $pc->slug]) }}">{{ $pc->name }}</a>
+
+                </button>
+                <div x-show="isOpen" x-transition
+                    class="absolute top-11 left-0 flex w-48 flex-col overflow-hidden rounded-xl border border-slate-300 bg-slate-100 py-1.5 dark:border-slate-700 dark:bg-slate-800"
+                    role="menu">
+                    @foreach ($pc->categories as $category)
+                        <a href="{{ route('products', ['parent_category' => $pc->slug, 'category' => $category->slug]) }}"
+                            wire:navigate
+                            class="bg-slate-100 px-4 py-2 text-sm text-slate-700 hover:bg-slate-800/5 hover:text-black focus-visible:bg-slate-800/10 focus-visible:text-black focus-visible:outline-none dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-100/5 dark:hover:text-white dark:focus-visible:bg-slate-100/10 dark:focus-visible:text-white"
+                            role="menuitem">{{ $category->name }}</a>
+                    @endforeach
+                </div>
+            </div>
+        @endforeach
         <li><a href="{{ route('products') }}" wire:navigate
                 class="font-semibold opacity-100 {{ request()->is('products') ? 'text-rose-700' : 'text-slate-800' }}  hover:text-rose-600  focus:outline-none  dark:text-rose-600 dark:hover:text-rose-600"
                 aria-current="page">Products</a></li>
         <li><a href="{{ route('categories') }}" wire:navigate
                 class="font-semibold {{ request()->is('categories') ? 'text-rose-700' : 'text-slate-800' }} hover:text-slate-600 focus:outline-none  dark:text-slate-300  dark:hover:text-rose-600">Categories</a>
         </li>
-        {{-- <li><a href="{{ route('categories') }}" wire:navigate
-                class="font-semibold {{ request()->is('categories') ? 'text-rose-700' : 'text-slate-800' }} hover:text-slate-600 focus:outline-none  dark:text-slate-300  dark:hover:text-rose-600">Categories</a>
-        </li> --}}
-        <li><a href="#"
-                class="font-semibold {{ request()->is('blog') ? 'text-rose-700' : 'text-slate-800' }} hover:text-slate-600 focus:outline-none  dark:text-slate-300 dark:hover:text-rose-600">Blog</a>
-        </li>
-        <li>
-            <a x-data="{ isOpen: false, openedWithKeyboard: false, leaveTimeout: null }" @mouseleave.prevent="leaveTimeout = setTimeout(() => { isOpen = false }, 200)"
-                @mouseenter="leaveTimeout ? clearTimeout(leaveTimeout) : true"
-                @keydown.esc.prevent="isOpen = false, openedWithKeyboard = false"
-                @click.outside="isOpen = false, openedWithKeyboard = false" class="relative">
-                <!-- Toggle Button -->
-                <button type="button" @mouseover="isOpen = true" @keydown.space.prevent="openedWithKeyboard = true"
-                    @keydown.enter.prevent="openedWithKeyboard = true" @keydown.down.prevent="openedWithKeyboard = true"
-                    class="inline-flex cursor-pointer items-center gap-2 whitespace-nowrap py-1.5 px-2.5 font-semibold tracking-wide transition hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800dark:bg-slate-800 dark:focus-visible:outline-slate-300"
-                    :class="isOpen || openedWithKeyboard ? 'text-black dark:text-white' : 'text-slate-700 dark:text-slate-300'"
-                    :aria-expanded="isOpen || openedWithKeyboard" aria-haspopup="true">
-                    Men
-                </button>
-                <!-- Dropdown Menu -->
-                <div x-cloak x-show="isOpen || openedWithKeyboard" x-transition x-trap="openedWithKeyboard"
-                    @click.outside="isOpen = false, openedWithKeyboard = false"
-                    @keydown.down.prevent="$focus.wrap().next()" @keydown.up.prevent="$focus.wrap().previous()"
-                    class="fixed -left-0 flex justify-center items-center w-[100%] h-[30%] flex-col overflow-hidden rounded-md border border-cyan-500 bg-cyan-50 py-1.5 dark:border-slate-700 dark:bg-cyan-50"
-                    role="menu">
 
-                </div>
-            </a>
-        </li>
 
     </ul>
     <div class="hidden md:flex gap-4 justify-between items-center">
@@ -58,7 +50,7 @@
                 class="@if ($total_count == 0) hidden @endif px-1 py-0 absolute -top-1.5 -right-3 rounded-full text-xs font-bold bg-rose-50 border border-rose-500 text-rose-600">{{ $total_count }}</span>
         </a>
         @guest
-            <a class="py-1.5 px-2.5 ml-4 inline-flex items-center gap-x-1 text-sm font-semibold rounded-md border border-transparent bg-rose-700 text-white hover:bg-rose-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            <a class="py-1.5 px-2.5 ml-2 inline-flex items-center gap-x-1 text-sm font-semibold rounded-md border border-transparent bg-rose-700 text-white hover:bg-rose-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 href="{{ route('login') }}" wire:navigate>
                 <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

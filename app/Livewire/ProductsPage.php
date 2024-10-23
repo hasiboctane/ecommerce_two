@@ -22,14 +22,29 @@ class ProductsPage extends Component
     public $selected_brands = [];
     public $price_range = 3000;
 
+    #[Url]
+    public $parent_category = null;
     public function addToCart(int $productId){
         $total_count = CartManagement::addItemToCart($productId);
         $this->dispatch('cart-count-updated', total_count:$total_count)->to(Navbar::class);
         $this->dispatch('show-toast', message:'Product added to cart',type:'success');
     }
+
+    public function mount($parent_category = null, $category = null)
+    {
+        $this->parent_category = $parent_category;
+        if ($category) {
+            $this->selected_categories = [Category::where('slug', $category)->first()->id];
+        }
+    }
     public function render()
     {
         $productQuery = Product::query()->where('is_active', 1);
+        if ($this->parent_category) {
+            $productQuery->whereHas('parentCategory', function ($query) {
+                $query->where('slug', $this->parent_category);
+            });
+        }
         if(!empty($this->selected_categories)){
             $productQuery->whereIn('category_id',$this->selected_categories);
         }

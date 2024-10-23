@@ -1,6 +1,6 @@
 <div class="w-full py-10  mx-auto">
     <section class="py-10 bg-cyan-50 dark:bg-gray-800 rounded-lg">
-        <div class="px-4 py-4 mx-auto max-w-7xl lg:py-6 md:px-6">
+        <div class="px-4 py-4 mx-auto  lg:py-6 md:px-6">
             <div class="flex flex-wrap mb-24 -mx-3">
                 <div class="w-full pr-2 lg:w-1/4 lg:block">
                     <div class="p-4 mb-5 bg-white border border-gray-200 dark:border-gray-900 dark:bg-gray-900">
