@@ -66,9 +66,10 @@ class ProductResource extends Resource
                             ->prefix('BDT'),
                     ]),
                     Section::make('Associations')->schema([
-                        Forms\Components\Select::make('parent_category')
-                            ->relationship('parentCategory','name')
-                            ->label('Product for'),
+                        Forms\Components\Select::make('parent_category_id')
+                            ->relationship('parentCategory', 'name')
+                            ->label('Product for')
+                            ->required(),
                         Forms\Components\Select::make('category_id')
                             ->label('Category')
                             ->options(Category::query()->pluck('name','id'))

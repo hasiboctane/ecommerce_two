@@ -13,7 +13,9 @@
                 <button type="button"
                     class="inline-flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-xl px-4 py-2 text-sm font-medium tracking-wide transition hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800 dark:focus-visible:outline-slate-300"
                     :class="isOpen ? 'text-rose-700 dark:text-rose-600' : 'text-slate-700 dark:text-slate-300'">
-                    <a href="{{ route('products', ['parent_category' => $pc->slug]) }}">{{ $pc->name }}</a>
+
+                    <a href="{{ route('products', ['parent_category' => $pc->slug]) }}" wire:navigate
+                        class="inline-flex items-center">{{ $pc->name }}</a>
 
                 </button>
                 <div x-show="isOpen" x-transition

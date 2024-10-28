@@ -9,8 +9,9 @@ class ParentCategory extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'slug', 'image', 'is_active'];
-    public function categories(){
-        return $this->hasMany(Category::class);
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 
     public function products(){

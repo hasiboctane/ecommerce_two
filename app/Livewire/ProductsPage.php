@@ -24,6 +24,8 @@ class ProductsPage extends Component
 
     #[Url]
     public $parent_category = null;
+    #[Url]
+    public $category = null;
     public function addToCart(int $productId){
         $total_count = CartManagement::addItemToCart($productId);
         $this->dispatch('cart-count-updated', total_count:$total_count)->to(Navbar::class);
@@ -33,20 +35,37 @@ class ProductsPage extends Component
     public function mount($parent_category = null, $category = null)
     {
         $this->parent_category = $parent_category;
+        $this->category = $category;
         if ($category) {
-            $this->selected_categories = [Category::where('slug', $category)->first()->id];
+            $category_model = Category::where('slug', $category)->first();
+            if ($category_model) {
+                $this->selected_categories = [$category_model->id];
+            }
         }
     }
     public function render()
     {
-        $productQuery = Product::query()->where('is_active', 1);
-        if ($this->parent_category) {
+        // $products = Product::all();
+        // dd($products->count());
+        $productQuery = Product::query()->where('is_active', true);
+
+        if (!empty($this->parent_category)) {
             $productQuery->whereHas('parentCategory', function ($query) {
                 $query->where('slug', $this->parent_category);
             });
         }
-        if(!empty($this->selected_categories)){
-            $productQuery->whereIn('category_id',$this->selected_categories);
+
+        // if (!empty($this->selected_categories)) {
+        //     $productQuery->whereIn('category_id', $this->selected_categories);
+        // } elseif (!empty($this->category)) {
+        //     $productQuery->whereHas('category', function ($query) {
+        //         $query->where('slug', $this->category);
+        //     });
+        // }
+
+        if (!empty($this->selected_categories)) {
+            $productQuery->whereIn('category_id', $this->selected_categories);
+            // dd($productQuery->get());
         }
         if(!empty($this->selected_brands)){
             $productQuery->whereIn('brand_id',$this->selected_brands);
@@ -55,7 +74,7 @@ class ProductsPage extends Component
             $productQuery->whereBetween('price',[0,$this->price_range]);
         }
         return view('livewire.products-page',[
-            'products' => $productQuery->paginate(6),
+            'products' => $productQuery->paginate(9),
             'categories' => Category::where('is_active', 1)->get(['id','name','slug']),
             'brands' => Brand::where('is_active', 1)->get(['id','name','slug']),
         ]);

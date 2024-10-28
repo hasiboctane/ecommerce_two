@@ -43,9 +43,11 @@ class CategoryResource extends Resource
                                 ->maxLength(255),
 
                         ]),
-                        Forms\Components\Select::make('parent_category')
-                            ->relationship('parentCategory','name')
-                            ->label('Product for'),
+                        Forms\Components\Select::make('parent_categories')
+                            ->multiple()
+                            ->relationship('parentCategories', 'name')
+                            ->preload()
+                            ->label('Category for'),
                         Forms\Components\FileUpload::make('image')
                             ->image()
                             ->directory('categories'),
@@ -64,13 +66,10 @@ class CategoryResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('parentCategory.name')
-                    ->label("Product for")
+                Tables\Columns\TextColumn::make('parentCategories.name')
+                    ->label("For")
                     ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\ImageColumn::make('image'),
-                // Tables\Columns\TextColumn::make('parent_category_id')
-                //     ->numeric()
-                //     ->sortable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
