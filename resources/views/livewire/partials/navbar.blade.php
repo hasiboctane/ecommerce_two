@@ -30,9 +30,9 @@
                 </div>
             </div>
         @endforeach
-        <li><a href="{{ route('products') }}" wire:navigate
+        {{-- <li><a href="{{ route('products') }}" wire:navigate
                 class="font-semibold opacity-100 {{ request()->is('products') ? 'text-rose-700' : 'text-slate-800' }}  hover:text-rose-600  focus:outline-none  dark:text-rose-600 dark:hover:text-rose-600"
-                aria-current="page">Products</a></li>
+                aria-current="page">Products</a></li> --}}
         <li><a href="{{ route('categories') }}" wire:navigate
                 class="font-semibold {{ request()->is('categories') ? 'text-rose-700' : 'text-slate-800' }} hover:text-slate-600 focus:outline-none  dark:text-slate-300  dark:hover:text-rose-600">Categories</a>
         </li>

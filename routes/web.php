@@ -23,7 +23,7 @@ Route::get('/categories', CategoriesPage::class)->name('categories');
 // Route::get('/products/{parent_category?}', ProductsPage::class)->name('products');
 Route::get('/products/{parent_category?}/{category?}', ProductsPage::class)->name('products');
 Route::get('/cart', CartPage::class)->name('cart');
-Route::get('/products/{slug}', ProductDetailsPage::class)->name('product.show');
+Route::get('/products/{parent_category?}/{category?}/{slug}', ProductDetailsPage::class)->name('product.show');
 
 
 Route::middleware('guest')->group(function () {
