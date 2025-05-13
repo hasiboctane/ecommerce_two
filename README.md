@@ -24,8 +24,8 @@ Dress Zone is a modern e-commerce website built with [Laravel](https://laravel.c
 1. Clone the repository:
 
     ```sh
-    git clone https://github.com/hasiboctane/project_2k25_two
-    cd dresszone
+    git clone https://github.com/hasiboctane/ecommerce_two
+    cd project_folder
     ```
 
 2. Install dependencies:
