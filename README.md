@@ -1,18 +1,61 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Dress Zone - E-commerce Website
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Dress Zone is a modern e-commerce website built with [Laravel](https://laravel.com/), [Tailwind CSS](https://tailwindcss.com/), [MySQL](https://www.mysql.com/), and [Livewire](https://livewire.laravel.com/). The admin dashboard is powered by [Filament](https://filamentphp.com/).
 
-## Dress Zone
+## Features
 
-This is an e-commerce website for Dress Zone
+-   User authentication (register, login, logout)
+-   Product catalog with categories and brands
+-   Shopping cart management
+-   Checkout process with multiple payment methods
+-   Order placement and order history
+-   Admin dashboard for product, order, and user management (Filament)
+-   Responsive design with Tailwind CSS
+-   Real-time UI updates with Livewire
 
-## Framework and Libraries
+## Tech Stack
+
+-   **Backend:** Laravel, MySQL
+-   **Frontend:** Tailwind CSS, Blade, Livewire
+-   **Admin Panel:** Filament
+
+## Getting Started
+
+1. Clone the repository:
+
+    ```sh
+    git clone https://github.com/hasiboctane/project_2k25_two
+    cd dresszone
+    ```
+
+2. Install dependencies:
+
+    ```sh
+    composer install
+    npm install
+    ```
+
+3. Copy `.env.example` to `.env` and set your environment variables.
+
+4. Run migrations:
+
+    ```sh
+    php artisan migrate
+    ```
+
+5. Build frontend assets:
+
+    ```sh
+    npm run build
+    ```
+
+6. Start the development server:
+   `sh
+php artisan serve
+`
+   ![alt text](dress_zone_front.png)
+   ![alt text](dress_zone_admin.png)
 
 ## License
 
-The website is licensed under the (https://dresszone.fashion).
+The website is licensed under the [Dress Zone License](https://dresszone.fashion).
